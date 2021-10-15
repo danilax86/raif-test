@@ -1,11 +1,14 @@
 package ru.danilax86.raiftest.services;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.danilax86.raiftest.models.Color;
 import ru.danilax86.raiftest.models.Socks;
 import ru.danilax86.raiftest.utils.IncorrectInputException;
 import ru.danilax86.raiftest.utils.LessThanZeroException;
+
+import java.util.Locale;
 
 
 @Service
@@ -86,8 +89,8 @@ public class SocksServiceImpl implements SocksService {
 
 	public void checkColor(String color) throws IncorrectInputException {
 		try {
-			boolean res = Color.validateColor(color);
-			if (!res) throw new IncorrectInputException("Введён неправильный цвет");
+			if (!EnumUtils.isValidEnum(Color.class, color.toUpperCase(Locale.ROOT)))
+				throw new IncorrectInputException("Введён неправильный цвет");
 		} catch (NullPointerException e) {
 			throw new IncorrectInputException("Введён неправильный цвет");
 		}
