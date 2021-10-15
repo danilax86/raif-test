@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "socks")
 public class Socks {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private int id;
 	private String color;
 	private int cottonPart;
